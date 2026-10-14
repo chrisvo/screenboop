@@ -1,0 +1,38 @@
+name: Build and test
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  macos:
+    runs-on: macos-15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Test image and editor invariants
+        run: swift test
+      - name: Build the native application
+        run: make build
+      - name: Package the runner-native app
+        run: |
+          ARCH="$(uname -m)"
+          ditto -c -k --sequesterRsrc --keepParent build/Screenboop.app "build/Screenboop-macOS-${ARCH}.zip"
+          shasum -a 256 "build/Screenboop-macOS-${ARCH}.zip" > "build/Screenboop-macOS-${ARCH}.zip.sha256"
+      - name: Upload the ad-hoc signed build
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: Screenboop-macOS-${{ runner.arch }}
+          path: |
+            build/Screenboop-macOS-*.zip
+            build/Screenboop-macOS-*.zip.sha256
+          if-no-files-found: error
+          retention-days: 14

@@ -1,0 +1,12 @@
+# Generated builds and local SwiftPM state
+.build/
+.swiftpm/
+build/
+*.app/
+.DS_Store
+
+# Local captures, diagnostics, and agent configuration are not source.
+research/
+*.log
+.omp/
+.mcp.json
