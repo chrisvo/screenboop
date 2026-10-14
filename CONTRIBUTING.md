@@ -11,7 +11,7 @@ make test
 make run
 ```
 
-`make test` runs deterministic image-geometry, redaction-privacy, editing-state, and overlap-stitching tests. It does not ask for Screen Recording or Accessibility permission. `make build` creates the ad-hoc signed application without opening it.
+`make test` runs deterministic image-geometry, redaction-privacy, editing-state, and overlap-stitching tests. It does not ask for Screen Recording or Accessibility permission. `make build` creates the application without opening it; signing defaults to ad-hoc unless `CODE_SIGN_IDENTITY` selects a certificate.
 
 See [Architecture](docs/architecture.md) for ownership and the top-left physical-pixel coordinate invariant. Follow the existing Swift style; the project has no third-party package or formatter requirement.
 

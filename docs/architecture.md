@@ -1,6 +1,6 @@
 # Architecture
 
-screenboop is a macOS 14+ executable built with Swift Package Manager (Swift tools 6.0, Swift language mode 5). It uses Apple frameworks and no third-party packages. `scripts/build.sh` wraps the executable in an app bundle and ad-hoc signs it; `make run` also launches that bundle. No external investigation tooling is required to build or use it.
+screenboop is a macOS 14+ executable built with Swift Package Manager (Swift tools 6.0, Swift language mode 5). It uses Apple frameworks and no third-party packages. `scripts/build.sh` wraps the executable in an app bundle and signs it, using ad-hoc signing by default or a caller-selected `CODE_SIGN_IDENTITY`; `make run` also launches that bundle. No external investigation tooling is required to build or use it.
 
 ## Source ownership
 

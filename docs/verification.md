@@ -5,6 +5,7 @@ Executed locally on Apple Silicon with macOS 26 and Apple Swift 6.2.1. The packa
 ## Build and automated checks
 
 - `make build`: release compilation, generated original icon, app-bundle packaging, and ad-hoc signing succeeded.
+- Both default signing and `CODE_SIGN_IDENTITY` certificate signing were exercised through `make build`, then checked with `codesign --verify --strict`. The selected local certificate produced an identifier-and-Apple-certificate designated requirement instead of the default binary-hash-only requirement.
 - `swift test`: **15 Swift Testing tests in two suites passed**. Coverage includes physical-pixel orientation, crop/resize/composition, color sampling, opaque redaction with translucent chosen colors, masked magnifier sampling, redaction precedence over pixelation, editable undo/redo after crop, exact overlap rows, stationary duplicates, static header/footer handling, rejected ambiguous/unmatched content, and narrow moving content.
 - Local Markdown links and all three PNG screenshot assets were checked for valid targets and image headers.
 
@@ -31,6 +32,12 @@ A controlled scrollable native test window covered the capture display. The prod
 The test window was closed afterwards. No personal desktop capture was added to the repository. Precise seam-pixel and stationary-bottom assertions use deterministic synthetic frame sequences; the live run does not establish arbitrary app/browser compatibility or real-world bottom detection.
 
 The picker smoke exposed that this macOS version exits normally with status 0 and no file when Escape dismisses the picker. The capture-result boundary now recognizes status 0 or 1 with no output/diagnostic as dismissal, while ordinary failed acquisition remains an error. The live Escape scenario passed after that change.
+
+### Installed app permission recovery
+
+A local ad-hoc build exposed a stale macOS recording grant: the privacy switch was enabled, but TCC logs reported a code-requirement mismatch against an older binary hash. The build was signed with an existing local development certificate, only `dev.screenboop.mac`'s ScreenCapture grant was reset through `tccutil`, and the app received a fresh grant and was restarted. The stored requirement then bound the app identifier and certificate rather than the obsolete hash. Permission checks remained intact.
+
+The certificate-signed `/Applications/screenboop.app` was then exercised through its own **Area** action and native picker against a generated two-color window. It acquired and displayed a **1242 × 562** PNG with the expected red/green content, without the permission error. This establishes a successful capture from the installed app, not just the separate native smoke host. The generated test window was closed afterwards.
 
 ## Limits
 

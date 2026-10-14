@@ -30,9 +30,11 @@ cd screenboop
 make run
 ```
 
-`make run` builds a release executable, packages `build/screenboop.app`, generates its icon, applies an ad-hoc signature, and opens the app. `make build` builds the same app without launching it.
+`make run` builds a release executable, packages `build/screenboop.app`, generates its icon, signs it, and opens the app. `make build` builds the same app without launching it.
 
-**Source builds are ad-hoc signed only—not Developer ID signed or notarized.** There is no prebuilt release installation path documented here. macOS may apply restrictions to downloaded or locally built apps; this project does not recommend disabling system security protections.
+**Builds are ad-hoc signed by default and are not notarized.** If you have a code-signing certificate in your Keychain, select it explicitly with `CODE_SIGN_IDENTITY='your certificate name or SHA-1' make build`. Reusing a certificate gives macOS a stable signing identity across rebuilds; ad-hoc grants can instead remain bound to an older binary hash. See [permission troubleshooting](docs/usage.md#troubleshooting).
+
+There is no prebuilt release installation path documented here. macOS may apply restrictions to downloaded or locally built apps; this project does not recommend disabling system security protections.
 
 To install locally, quit the running build, copy `build/screenboop.app` into `/Applications`, and open it there. Grant capture permissions to that installed copy. Later source builds do not automatically replace the installed app.
 

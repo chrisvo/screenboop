@@ -127,6 +127,7 @@ This is vertical scrolling within a fixed rectangle, not full-page browser expor
 | Symptom | What to try |
 | --- | --- |
 | Capture permission error | Enable screenboop in the Screen Recording privacy pane; restart it if macOS requests, then retry. |
+| Recording switch is on, but permission is still denied after a rebuild | An ad-hoc signature may no longer match the saved grant. Save your edits and quit the app, run `tccutil reset ScreenCapture dev.screenboop.mac`, reopen `/Applications/screenboop.app`, and grant permission again. This resets only screenboop's recording grant. Use the same code-signing certificate for later builds when available. |
 | Scrolling permission error | Enable screenboop in Accessibility and retry. Ordinary capture does not need this permission. |
 | Capture shortcut does nothing | Check screenboop is running; use its menu-bar capture actions if another app owns the shortcut. |
 | Native picker closes without opening an image | Escape dismisses it. Avoid holding Control during capture: macOS may choose clipboard-only output, leaving the editor unchanged; paste the clipboard image or retry without Control. |
