@@ -1,16 +1,16 @@
-# Using Screenboop
+# Using screenboop
 
-Build and launch with `make run` from the repository root. For prerequisites and source-build signing limitations, see the [README](../README.md#build-and-run).
+Open `screenboop.app` from Applications, or build and launch with `make run` from the repository root. For prerequisites and source-build signing limitations, see the [README](../README.md#build-and-run).
 
-![Screenboop welcome window](screenshots/welcome.png)
+![screenboop welcome window](screenshots/welcome.png)
 
 ## First capture and permissions
 
-1. Choose a capture in the sidebar, **Capture** menu, or Screenboop's menu-bar icon.
-2. Allow Screenboop in **System Settings → Privacy & Security → Screen & System Audio Recording** (called **Screen Recording** on older macOS).
-3. Quit and reopen Screenboop if macOS asks you to, then retry.
+1. Choose a capture in the sidebar, **Capture** menu, or screenboop's menu-bar icon.
+2. Allow screenboop in **System Settings → Privacy & Security → Screen & System Audio Recording** (called **Screen Recording** on older macOS).
+3. Quit and reopen screenboop if macOS asks you to, then retry.
 
-Screenboop hides its editor during capture and returns to it afterwards. Opening images, editing, and OCR do not require screen-capture permission. **Accessibility** permission is requested only for automatic scrolling, so the app can send scroll events into the selected content.
+screenboop hides its editor during capture and returns to it afterwards. Opening images, editing, and OCR do not require screen-capture permission. **Accessibility** permission is requested only for automatic scrolling, so the app can send scroll events into the selected content.
 
 ### Global capture shortcuts
 
@@ -22,7 +22,7 @@ Screenboop hides its editor during capture and returns to it afterwards. Opening
 | Control–Option–4 | Main display after a five-second countdown |
 | Control–Option–5 | Scrolling region |
 
-These shortcuts work while Screenboop is running. If another app owns a shortcut, use the sidebar or menu-bar menu instead. Closing the editor does not quit Screenboop; reopen it through the menu-bar icon or Dock, or use **Screenboop → Quit Screenboop** to exit.
+These shortcuts work while screenboop is running. If another app owns a shortcut, use the sidebar or menu-bar menu instead. Closing the editor does not quit screenboop; reopen it through the menu-bar icon or Dock, or use **screenboop → Quit screenboop** to exit.
 
 Press **Escape** to dismiss an area/window picker or cancel scrolling selection/capture. The scrolling progress panel also has **Cancel**. To stop a countdown, reopen the editor from the menu-bar icon and use **Cancel** in its status bar. A cancelled capture leaves the current image unchanged. In the editor, Escape clears a draft or selection; it does not undo committed annotations.
 
@@ -70,12 +70,12 @@ The displayed dimensions and measurement labels are image pixels, not macOS scre
 
 Redaction is an output operation, not deletion of every local copy:
 
-- New screen captures are automatically saved as **original, unredacted PNGs** in `~/Library/Application Support/Screenboop/Captures`.
+- New screen captures are automatically saved as **original, unredacted PNGs** in `~/Library/Application Support/screenboop/Captures`.
 - The editor's current source image, original-pixel color inspector, and undo snapshots can still contain private content.
 - Previously exported images, copied clipboard content, and existing pins do not change when you edit the document.
-- **Clear history…** in the sidebar asks for confirmation and removes the PNG capture entries in Screenboop's capture folder. It does not alter the current editor image, undo history, exports elsewhere, pins, or clipboard, and is not a secure-erasure guarantee.
+- **Clear history…** in the sidebar asks for confirmation and removes the PNG capture entries in screenboop's capture folder. It does not alter the current editor image, undo history, exports elsewhere, pins, or clipboard, and is not a secure-erasure guarantee.
 
-Review the exported image before sharing it. Clear sensitive history when appropriate; load another image to replace the current document and reset its undo stack, close old pins, and replace clipboard contents separately if needed. Copies outside Screenboop's history remain your responsibility.
+Review the exported image before sharing it. Clear sensitive history when appropriate; load another image to replace the current document and reset its undo stack, close old pins, and replace clipboard contents separately if needed. Copies outside screenboop's history remain your responsibility.
 
 Recent captures can be reopened from the sidebar. Its folder button or **File → Show capture history** opens the storage folder. History contains captured originals, not a saved annotation project; opening an existing file or pasting an image does not automatically add it to capture history.
 
@@ -83,7 +83,7 @@ Recent captures can be reopened from the sidebar. Its folder button or **File �
 
 Choose **Read text & QR** in Image Actions or **Image → Read text & QR codes** (**Shift–Command–R**). Drag a selection first to limit recognition to that region; otherwise it reads the whole image. Recognition uses the current rendered annotations without the decorative backdrop, including redaction masks.
 
-![Screenboop's local text and QR recognition sheet](screenshots/ocr.png)
+![screenboop's local text and QR recognition sheet](screenshots/ocr.png)
 
 Apple Vision runs on the local image. Review or edit the result in the sheet and choose **Copy text**. Recognized text and QR payloads are presented as plain text; QR URLs are **never opened automatically**. Recognition can miss small, blurred, stylized, or rotated text and is not an accuracy guarantee.
 
@@ -113,9 +113,9 @@ A pin is a flattened snapshot in a floating, resizable window. Drag it to move, 
 
 ## Scrolling capture
 
-1. Allow Screen Recording and **System Settings → Privacy & Security → Accessibility** for Screenboop.
+1. Allow Screen Recording and **System Settings → Privacy & Security → Accessibility** for screenboop.
 2. Start scrolling capture and drag a rectangle **inside one display's scrollable content**, at least 48 × 48 screen points. Exclude fixed sidebars and moving controls when possible.
-3. Leave the target window in place and unobstructed. Screenboop moves the pointer to the rectangle's center, sends downward scroll events, captures overlapping frames, and aligns them.
+3. Leave the target window in place and unobstructed. screenboop moves the pointer to the rectangle's center, sends downward scroll events, captures overlapping frames, and aligns them.
 4. Wait for the editor to return, or press Escape / **Cancel** to stop without replacing your image.
 
 Capture starts from the target's **current scroll position**; it does not rewind to the top or restore the original scroll position. It is limited to **20 frames**. Stationary content is treated as the bottom; the result may instead stop at the frame limit before the page ends. Static header/footer matching attempts to retain those bands once. Unmatched or ambiguous overlaps fail rather than append an unaligned frame.
@@ -126,9 +126,9 @@ This is vertical scrolling within a fixed rectangle, not full-page browser expor
 
 | Symptom | What to try |
 | --- | --- |
-| Capture permission error | Enable Screenboop in the Screen Recording privacy pane; restart it if macOS requests, then retry. |
-| Scrolling permission error | Enable Screenboop in Accessibility and retry. Ordinary capture does not need this permission. |
-| Capture shortcut does nothing | Check Screenboop is running; use its menu-bar capture actions if another app owns the shortcut. |
+| Capture permission error | Enable screenboop in the Screen Recording privacy pane; restart it if macOS requests, then retry. |
+| Scrolling permission error | Enable screenboop in Accessibility and retry. Ordinary capture does not need this permission. |
+| Capture shortcut does nothing | Check screenboop is running; use its menu-bar capture actions if another app owns the shortcut. |
 | Native picker closes without opening an image | Escape dismisses it. Avoid holding Control during capture: macOS may choose clipboard-only output, leaving the editor unchanged; paste the clipboard image or retry without Control. |
 | Scrolling says the content did not move | Move the target above its bottom, select content with a scrollable center, and avoid sidebars. |
 | Ambiguous overlap or changing fixed band | Select distinctive, static content without animated or sticky elements; avoid moving or covering the window. |

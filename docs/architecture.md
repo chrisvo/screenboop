@@ -1,6 +1,6 @@
 # Architecture
 
-Screenboop is a macOS 14+ executable built with Swift Package Manager (Swift tools 6.0, Swift language mode 5). It uses Apple frameworks and no third-party packages. `scripts/build.sh` wraps the executable in an app bundle and ad-hoc signs it; `make run` also launches that bundle. No external investigation tooling is required to build or use it.
+screenboop is a macOS 14+ executable built with Swift Package Manager (Swift tools 6.0, Swift language mode 5). It uses Apple frameworks and no third-party packages. `scripts/build.sh` wraps the executable in an app bundle and ad-hoc signs it; `make run` also launches that bundle. No external investigation tooling is required to build or use it.
 
 ## Source ownership
 
@@ -46,9 +46,9 @@ Keep this invariant when changing tools or rendering: view-space points, Retina 
 
 Redaction is a renderer rule, not just annotation ordering. An effect source first bakes opaque redaction masks into image pixels; magnification and pixelation sample that source. Masks render again after other annotations, with forced opacity and copy blending. This prevents those output effects from sampling covered original pixels.
 
-That rule does **not** erase the original document image. The color inspector deliberately samples that image, undo retains earlier documents, and `CaptureHistory` saves the original capture as PNG under `~/Library/Application Support/Screenboop/Captures`. History clearing removes listed capture PNGs after confirmation, not exports or the current document. PNG/JPEG and clipboard output are flattened; pins keep independent rendered snapshots.
+That rule does **not** erase the original document image. The color inspector deliberately samples that image, undo retains earlier documents, and `CaptureHistory` saves the original capture as PNG under `~/Library/Application Support/screenboop/Captures`. History clearing removes listed capture PNGs after confirmation, not exports or the current document. PNG/JPEG and clipboard output are flattened; pins keep independent rendered snapshots.
 
-Screenboop has no application networking, accounts, telemetry, or cloud integration. Apple Vision receives local image bytes. QR results are strings, not navigation requests. Export-folder preference and window geometry use local system preferences.
+screenboop has no application networking, accounts, telemetry, or cloud integration. Apple Vision receives local image bytes. QR results are strings, not navigation requests. Export-folder preference and window geometry use local system preferences.
 
 ## Capture boundary and limits
 
@@ -58,4 +58,4 @@ Scrolling capture owns one rectangle and checks the window under its center befo
 
 Image boundaries enforce 32,768 pixels per side and 100 million total pixels, including rendered padding and composition. Allocation or decoding can still fail below those limits; errors are surfaced rather than replaced with a fabricated result.
 
-For user-facing privacy and operational limits, see [Usage](usage.md). The separate [research report](shottr-findings.md) distinguishes observed inspiration-app behavior from Screenboop's independent implementation.
+For user-facing privacy and operational limits, see [Usage](usage.md). The separate [research report](shottr-findings.md) distinguishes observed inspiration-app behavior from screenboop's independent implementation.

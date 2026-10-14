@@ -75,7 +75,7 @@ final class PinWindowController: NSWindowController {
         let size = CGSize(width: max(140, CGFloat(image.width) * scale), height: max(100, CGFloat(image.height) * scale))
         let panel = NSPanel(contentRect: CGRect(origin: CGPoint(x: screen.midX - size.width / 2, y: screen.midY - size.height / 2), size: size),
             styleMask: [.borderless, .resizable, .nonactivatingPanel], backing: .buffered, defer: false)
-        panel.title = "Pinned reference — Screenboop"
+        panel.title = "Pinned reference — screenboop"
         panel.level = .floating
         panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
         panel.isMovableByWindowBackground = true

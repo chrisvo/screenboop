@@ -16,7 +16,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         buildStatusMenu()
         let frame = CGRect(x: 100, y: 100, width: 1320, height: 830)
         let window = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: false)
-        window.title = "Screenboop"
+        window.title = "screenboop"
         window.titleVisibility = .hidden
         window.titlebarAppearsTransparent = true
         window.backgroundColor = .white
@@ -29,7 +29,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         self.window = window
         store.showWindow = { [weak self] in self?.showEditor(nil) }
         store.$document.sink { [weak self] document in
-            self?.window?.title = document.map { "\($0.title) — Screenboop" } ?? "Screenboop"
+            self?.window?.title = document.map { "\($0.title) — screenboop" } ?? "screenboop"
         }.store(in: &subscriptions)
         if let icon = Bundle.main.url(forResource: "AppIcon", withExtension: "icns"), let image = NSImage(contentsOf: icon) { NSApp.applicationIconImage = image }
         let hotKeys = GlobalHotKeys { [weak self] identifier in
@@ -124,12 +124,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     }
     private func buildMainMenu() {
         let root = NSMenu()
-        let application = submenu("Screenboop", into: root)
-        application.addItem(item("About Screenboop & shortcuts", #selector(about(_:))))
+        let application = submenu("screenboop", into: root)
+        application.addItem(item("About screenboop & shortcuts", #selector(about(_:))))
         application.addItem(.separator())
-        let hide = NSMenuItem(title: "Hide Screenboop", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h")
+        let hide = NSMenuItem(title: "Hide screenboop", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h")
         application.addItem(hide)
-        application.addItem(item("Quit Screenboop", #selector(terminate(_:)), key: "q"))
+        application.addItem(item("Quit screenboop", #selector(terminate(_:)), key: "q"))
         let file = submenu("File", into: root)
         file.addItem(item("Open image…", #selector(openImage(_:)), key: "o"))
         file.addItem(item("Open example image", #selector(example(_:))))
@@ -158,18 +158,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         view.addItem(item("Zoom in", #selector(zoomIn(_:)), key: "+"))
         view.addItem(item("Zoom out", #selector(zoomOut(_:)), key: "-"))
         let help = submenu("Help", into: root)
-        help.addItem(item("Screenboop shortcuts & privacy", #selector(about(_:))))
+        help.addItem(item("screenboop shortcuts & privacy", #selector(about(_:))))
         help.addItem(item("Screen Recording settings", #selector(privacy(_:))))
         NSApp.mainMenu = root
     }
     private func buildStatusMenu() {
         let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        let image = NSImage(systemSymbolName: "viewfinder", accessibilityDescription: "Screenboop")
+        let image = NSImage(systemSymbolName: "viewfinder", accessibilityDescription: "screenboop")
         image?.isTemplate = true
         statusItem.button?.image = image
-        statusItem.button?.toolTip = "Screenboop — capture, annotate, share"
+        statusItem.button?.toolTip = "screenboop — capture, annotate, share"
         let menu = NSMenu()
-        menu.addItem(item("Open Screenboop", #selector(showEditor(_:))))
+        menu.addItem(item("Open screenboop", #selector(showEditor(_:))))
         menu.addItem(.separator())
         addCaptureItems(to: menu)
         menu.addItem(.separator())
@@ -177,7 +177,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         menu.addItem(item("Paste image", #selector(pasteImage(_:))))
         menu.addItem(item("Show capture history", #selector(history(_:))))
         menu.addItem(.separator())
-        menu.addItem(item("Quit Screenboop", #selector(terminate(_:))))
+        menu.addItem(item("Quit screenboop", #selector(terminate(_:))))
         statusItem.menu = menu
         self.statusItem = statusItem
     }

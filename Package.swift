@@ -2,9 +2,9 @@
 import PackageDescription
 
 let package = Package(
-    name: "Screenboop",
+    name: "screenboop",
     platforms: [.macOS(.v14)],
-    products: [.executable(name: "Screenboop", targets: ["Screenboop"])],
+    products: [.executable(name: "screenboop", targets: ["Screenboop"])],
     targets: [
         .executableTarget(name: "Screenboop"),
         .testTarget(name: "ScreenboopTests", dependencies: ["Screenboop"])

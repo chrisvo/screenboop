@@ -2,7 +2,7 @@
 
 ## 1.0.0 — 2026-10-14
 
-Initial public source for Screenboop, an independent, local-only native macOS screenshot utility.
+Initial public source for screenboop, an independent, local-only native macOS screenshot utility.
 
 - Area, window, main-display, timed, and bounded vertical scrolling capture.
 - Fifteen selection, annotation, effect, privacy, and measurement tools.

@@ -2,9 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
 <key>CFBundleIdentifier</key><string>dev.screenboop.mac</string>
-<key>CFBundleName</key><string>Screenboop</string>
-<key>CFBundleDisplayName</key><string>Screenboop</string>
-<key>CFBundleExecutable</key><string>Screenboop</string>
+<key>CFBundleName</key><string>screenboop</string>
+<key>CFBundleDisplayName</key><string>screenboop</string>
+<key>CFBundleExecutable</key><string>screenboop</string>
 <key>CFBundlePackageType</key><string>APPL</string>
 <key>CFBundleShortVersionString</key><string>1.0.0</string>
 <key>CFBundleVersion</key><string>1</string>
@@ -13,7 +13,7 @@
 <key>LSApplicationCategoryType</key><string>public.app-category.graphics-design</string>
 <key>NSHighResolutionCapable</key><true/>
 <key>NSPrincipalClass</key><string>NSApplication</string>
-<key>NSScreenCaptureUsageDescription</key><string>Screenboop captures only when you choose a capture command. Images and recognized text stay on this Mac.</string>
+<key>NSScreenCaptureUsageDescription</key><string>screenboop captures only when you choose a capture command. Images and recognized text stay on this Mac.</string>
 <key>CFBundleDocumentTypes</key><array><dict>
 <key>CFBundleTypeName</key><string>Image</string>
 <key>CFBundleTypeRole</key><string>Viewer</string>

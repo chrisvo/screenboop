@@ -4,7 +4,7 @@ build:
 	bash scripts/build.sh
 
 run: build
-	open build/Screenboop.app
+	open build/screenboop.app
 
 test:
 	swift test

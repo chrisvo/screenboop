@@ -1,6 +1,6 @@
 # Contributing
 
-Screenboop is an independent native macOS application. Contributions are covered by the repository's MIT license.
+screenboop is an independent native macOS application. Contributions are covered by the repository's MIT license.
 
 ## Develop
 
@@ -23,6 +23,6 @@ See [Architecture](docs/architecture.md) for ownership and the top-left physical
 - Preserve permission checks, cancellation, process cleanup, image-size bounds, and redaction precedence. Never add permission bypasses.
 - Keep images and recognized text local. Networked features require an explicit design discussion; do not introduce telemetry or background uploads.
 
-Do not commit builds, personal captures, credentials, investigation tool checkouts, or proprietary application binaries, decoded resources, and artwork. Public screenshots should show Screenboop with original example content.
+Do not commit builds, personal captures, credentials, investigation tool checkouts, or proprietary application binaries, decoded resources, and artwork. Public screenshots should show screenboop with original example content.
 
 Use concise Conventional Commit subjects and describe observable outcomes, risks, and verification in pull requests. Native picker and scrolling checks depend on macOS privacy grants and are not established by the permission-free test suite alone.

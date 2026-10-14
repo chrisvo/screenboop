@@ -1,8 +1,8 @@
 # Shottr findings and independent design choices
 
-Screenboop takes inspiration from screenshot-editing workflows, not Shottr's proprietary source or artwork. This report records a bounded study of one shipped Shottr build and explains which observations informed an **independent** implementation. It does not establish source equivalence, matching algorithms, pixel-identical appearance, or performance parity.
+screenboop takes inspiration from screenshot-editing workflows, not Shottr's proprietary source or artwork. This report records a bounded study of one shipped Shottr build and explains which observations informed an **independent** implementation. It does not establish source equivalence, matching algorithms, pixel-identical appearance, or performance parity.
 
-The study used artifact metadata/import inspection, compiled interface-resource decoding, and a controlled editor/copy observation. No deep-analysis provider (Hopper, Ghidra, or IDA) was configured; no decompiled source or native runtime API-call trace was obtained. The full raw evidence bundle and decoded proprietary resources are retained privately outside this repository and are not redistributed here. The screenshots in Screenboop's public guides show Screenboop, not decoded Shottr resources.
+The study used artifact metadata/import inspection, compiled interface-resource decoding, and a controlled editor/copy observation. No deep-analysis provider (Hopper, Ghidra, or IDA) was configured; no decompiled source or native runtime API-call trace was obtained. The full raw evidence bundle and decoded proprietary resources are retained privately outside this repository and are not redistributed here. The screenshots in screenboop's public guides show screenboop, not decoded Shottr resources.
 
 ## Artifact identity
 
@@ -75,13 +75,13 @@ This demonstrates a raster clipboard result for that controlled image and action
 
 Pin scenarios failed twice with an element-missing result despite a pin path appearing in the observation tree. **Shottr pin behavior was not runtime-verified.** The first window also displayed a standard purchase prompt; it was neither bypassed nor modified.
 
-## Independent Screenboop choices
+## Independent screenboop choices
 
 The following links are design decisions based on the workflow surfaces above, not claims of recovered internals:
 
-| Observed surface | Screenboop's independent choice |
+| Observed surface | screenboop's independent choice |
 | --- | --- |
-| Capture/permission API references | Use an owned macOS `screencapture` subprocess and explicit Screen Recording checks. Screenboop does not use ScreenCaptureKit. |
+| Capture/permission API references | Use an owned macOS `screencapture` subprocess and explicit Screen Recording checks. screenboop does not use ScreenCaptureKit. |
 | Carbon hotkey references | Register fixed Control–Option–1 through 5 shortcuts with Carbon; preserve menu-bar capture when registration conflicts. |
 | Annotation labels and controls | Implement original pixel-based mark values and a Core Graphics/Core Text renderer behind a deliberately light SwiftUI/AppKit editor. No proprietary nibs, artwork, or implementation are copied. |
 | Pixel size, zoom, and Tab color-copy UI | Keep physical image pixels as the document unit; convert view coordinates at the canvas boundary and expose original sRGB color sampling. |
@@ -89,15 +89,15 @@ The following links are design decisions based on the workflow surfaces above, n
 | Blur/effect workflow | Separate visual pixelation from opaque Redact masks; require masking before magnifier/pixelation sampling and flatten masks into exported pixels. |
 | Scrolling symbols and preference controls | Implement a bounded 20-frame vertical overlap matcher with stationary-frame detection, candidate fixed-band handling, and explicit rejection of ambiguous matches. Shottr's stitching algorithm remains unknown. |
 | Copy/save/add-capture surfaces | Provide flattened PNG clipboard output, PNG/JPEG export, and explicit vertical/horizontal combination. Add local original-capture history with clear privacy warnings. |
-| Pin control declarations | Implement independent floating snapshot windows. Their behavior comes from Screenboop code and testing, not a successful Shottr pin scenario. |
+| Pin control declarations | Implement independent floating snapshot windows. Their behavior comes from screenboop code and testing, not a successful Shottr pin scenario. |
 | Upload/purchase surfaces | Omit uploads, accounts, payment/license flows, and cloud integration. |
 
-Crop, undo snapshots, rounded gradient backdrops, and image limits are documented from Screenboop's actual implementation in [Architecture](architecture.md) and [Usage](usage.md), not attributed to recovered Shottr source.
+Crop, undo snapshots, rounded gradient backdrops, and image limits are documented from screenboop's actual implementation in [Architecture](architecture.md) and [Usage](usage.md), not attributed to recovered Shottr source.
 
 ## Validation boundary and remaining unknowns
 
-Screenboop's own exercised checks include pixel-coordinate/crop rendering, export and clipboard pixels, local history round-trips, OCR and QR fixtures, opaque redaction and masked magnification, editable undo/redo restoration, real area/window/main-display acquisition, picker cancellation, and a visible closable pin. Synthetic scrolling fixtures exercise overlap composition and stationary duplicate handling. A separate controlled native scrolling window also produced a real **1,280 × 10,758** acquisition/composition result at the **20-frame** bound.
+screenboop's own exercised checks include pixel-coordinate/crop rendering, export and clipboard pixels, local history round-trips, OCR and QR fixtures, opaque redaction and masked magnification, editable undo/redo restoration, real area/window/main-display acquisition, picker cancellation, and a visible closable pin. Synthetic scrolling fixtures exercise overlap composition and stationary duplicate handling. A separate controlled native scrolling window also produced a real **1,280 × 10,758** acquisition/composition result at the **20-frame** bound.
 
-Those checks are Screenboop-specific. The controlled scrolling run does not establish arbitrary app/browser compatibility, sticky-UI behavior, secondary-display scrolling coverage, or exact real-world seam/bottom behavior; precise overlap and stationary-bottom evidence comes from the synthetic fixtures. It is not a comparative benchmark.
+Those checks are screenboop-specific. The controlled scrolling run does not establish arbitrary app/browser compatibility, sticky-UI behavior, secondary-display scrolling coverage, or exact real-world seam/bottom behavior; precise overlap and stationary-bottom evidence comes from the synthetic fixtures. It is not a comparative benchmark.
 
-Shottr's precise stitching, object removal/inpainting, upload, signing, and other internal algorithms remain unknown. No source-equivalence or matching performance claim follows from imported symbols, UI selectors, or one copy action. [Shottr's official website](https://shottr.cc/) describes the commercial product, but its advertised features or timings were not independently measured by this study and are not Screenboop acceptance criteria.
+Shottr's precise stitching, object removal/inpainting, upload, signing, and other internal algorithms remain unknown. No source-equivalence or matching performance claim follows from imported symbols, UI selectors, or one copy action. [Shottr's official website](https://shottr.cc/) describes the commercial product, but its advertised features or timings were not independently measured by this study and are not screenboop acceptance criteria.

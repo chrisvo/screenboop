@@ -59,7 +59,7 @@ final class CaptureService {
     private func perform(_ mode: CaptureMode) async throws -> CGImage? {
         try Task.checkCancellation()
         guard CGPreflightScreenCaptureAccess() || CGRequestScreenCaptureAccess() else {
-            throw ScreenboopError.message("Screen Recording permission is required. Open System Settings → Privacy & Security → Screen & System Audio Recording (Screen Recording on older macOS), enable Screenboop, then quit and reopen the app if macOS requests it. Retry the capture afterwards.")
+            throw ScreenboopError.message("Screen Recording permission is required. Open System Settings → Privacy & Security → Screen & System Audio Recording (Screen Recording on older macOS), enable screenboop, then quit and reopen the app if macOS requests it. Retry the capture afterwards.")
         }
         try Task.checkCancellation()
         switch mode {
@@ -96,7 +96,7 @@ final class CaptureService {
     private func scrollingCapture() async throws -> CGImage {
         let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
         guard AXIsProcessTrustedWithOptions(options) else {
-            throw ScreenboopError.message("Scrolling capture requires Accessibility permission to send scroll events. Open System Settings → Privacy & Security → Accessibility, enable Screenboop, and retry. Screenboop does not change this setting for you.")
+            throw ScreenboopError.message("Scrolling capture requires Accessibility permission to send scroll events. Open System Settings → Privacy & Security → Accessibility, enable screenboop, and retry. screenboop does not change this setting for you.")
         }
         onStatus?("Drag a rectangle inside the scrollable content on one display. Escape cancels.")
         let regionSelector = CaptureRegionSelector { [weak self] in self?.cancel() }
@@ -153,7 +153,7 @@ final class CaptureService {
     private func postScroll(at point: CGPoint, distance: Int32) throws {
         try Task.checkCancellation()
         guard AXIsProcessTrusted() else {
-            throw ScreenboopError.message("Accessibility permission was revoked. Enable Screenboop in System Settings → Privacy & Security → Accessibility and retry.")
+            throw ScreenboopError.message("Accessibility permission was revoked. Enable screenboop in System Settings → Privacy & Security → Accessibility and retry.")
         }
         guard let source = CGEventSource(stateID: .privateState),
               let move = CGEvent(mouseEventSource: source, mouseType: .mouseMoved, mouseCursorPosition: point, mouseButton: .left),
@@ -180,7 +180,7 @@ private func captureComputation<T>(_ body: @escaping @Sendable () throws -> T) a
 }
 
 private final class ScreenshotJob: @unchecked Sendable {
-    private let queue = DispatchQueue(label: "Screenboop.screenshot", qos: .userInitiated)
+    private let queue = DispatchQueue(label: "screenboop.screenshot", qos: .userInitiated)
     private let lock = NSLock()
     private let arguments: [String]
     private let interactive: Bool
@@ -239,7 +239,7 @@ private final class ScreenshotJob: @unchecked Sendable {
             return
         }
         do {
-            let directory = FileManager.default.temporaryDirectory.appendingPathComponent("Screenboop-\(UUID().uuidString)", isDirectory: true)
+            let directory = FileManager.default.temporaryDirectory.appendingPathComponent("screenboop-\(UUID().uuidString)", isDirectory: true)
             self.directory = directory
             try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: false, attributes: [.posixPermissions: 0o700])
             let imageURL = directory.appendingPathComponent("capture.png")
@@ -283,7 +283,7 @@ private final class ScreenshotJob: @unchecked Sendable {
             if interactive, !exists, process.terminationReason == .exit,
                (process.terminationStatus == 0 || process.terminationStatus == 1), diagnostic.isEmpty {
                 guard CGPreflightScreenCaptureAccess() else {
-                    throw ScreenboopError.message("Screen Recording permission is no longer available. Enable Screenboop in System Settings → Privacy & Security → Screen & System Audio Recording, then reopen the app if macOS requests it.")
+                    throw ScreenboopError.message("Screen Recording permission is no longer available. Enable screenboop in System Settings → Privacy & Security → Screen & System Audio Recording, then reopen the app if macOS requests it.")
                 }
                 // macOS versions return either 0 or 1 when the picker is dismissed.
                 // No output is also possible when the user chooses clipboard-only capture.
@@ -346,7 +346,7 @@ private struct CaptureScrollTarget {
                   (window[kCGWindowAlpha as String] as? Double ?? 1) > 0 else { continue }
             return CaptureScrollTarget(windowID: id, ownerPID: pid_t(pid))
         }
-        throw ScreenboopError.message("Select scrollable content inside another app's window, not the desktop or Screenboop.")
+        throw ScreenboopError.message("Select scrollable content inside another app's window, not the desktop or screenboop.")
     }
 
     func ensureStillAt(_ point: CGPoint) throws {
@@ -528,7 +528,7 @@ private final class CaptureProgressPanel: NSObject {
         panel = NSPanel(contentRect: CGRect(x: 0, y: 0, width: 350, height: 106), styleMask: [.titled, .nonactivatingPanel], backing: .buffered, defer: false)
         label = NSTextField(labelWithString: "Preparing scrolling capture…")
         super.init()
-        panel.title = "Screenboop scrolling capture"
+        panel.title = "screenboop scrolling capture"
         panel.level = .floating
         panel.isReleasedWhenClosed = false
         panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]

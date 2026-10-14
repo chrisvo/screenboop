@@ -34,7 +34,7 @@ struct EditorView: View {
         .sheet(isPresented: $store.showRecognition) { recognitionSheet }
         .sheet(isPresented: $store.showResize) { ResizeSheet(store: store) }
         .sheet(isPresented: $store.showAbout) { aboutSheet }
-        .alert("Screenboop", isPresented: Binding(get: { store.errorMessage != nil }, set: { if !$0 { store.errorMessage = nil } })) {
+        .alert("screenboop", isPresented: Binding(get: { store.errorMessage != nil }, set: { if !$0 { store.errorMessage = nil } })) {
             Button("OK") { store.errorMessage = nil }
             Button("Screen recording settings") { store.errorMessage = nil; store.openPrivacySettings() }
         } message: { Text(store.errorMessage ?? "") }
@@ -339,7 +339,7 @@ struct EditorView: View {
 
     private var aboutSheet: some View {
         VStack(alignment: .leading, spacing: 18) {
-            Text("Screenboop").font(.system(size: 25, weight: .bold, design: .rounded))
+            Text("screenboop").font(.system(size: 25, weight: .bold, design: .rounded))
             Text("An original, local-only macOS screenshot utility. Inspired by Shottr’s workflows, not its code or artwork.").font(.system(size: 12)).foregroundStyle(muted)
             Divider()
             Text("CAPTURE ANYWHERE").font(.system(size: 10, weight: .semibold)).foregroundStyle(muted)

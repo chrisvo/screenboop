@@ -59,7 +59,7 @@ final class CaptureHistory {
     let directory: URL
     init(directory: URL? = nil) throws {
         self.directory = directory ?? FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("Screenboop/Captures", isDirectory: true)
+            .appendingPathComponent("screenboop/Captures", isDirectory: true)
         try FileManager.default.createDirectory(at: self.directory, withIntermediateDirectories: true)
     }
 
@@ -81,7 +81,7 @@ final class CaptureHistory {
     func save(_ image: CGImage) throws -> URL {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH.mm.ss"
-        let name = "Screenboop \(formatter.string(from: Date())) \(UUID().uuidString.prefix(6)).png"
+        let name = "screenboop \(formatter.string(from: Date())) \(UUID().uuidString.prefix(6)).png"
         let destination = directory.appendingPathComponent(name)
         try ImageRenderer.pngData(image).write(to: destination, options: .atomic)
         return destination

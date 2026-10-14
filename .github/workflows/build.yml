@@ -25,14 +25,14 @@ jobs:
       - name: Package the runner-native app
         run: |
           ARCH="$(uname -m)"
-          ditto -c -k --sequesterRsrc --keepParent build/Screenboop.app "build/Screenboop-macOS-${ARCH}.zip"
-          shasum -a 256 "build/Screenboop-macOS-${ARCH}.zip" > "build/Screenboop-macOS-${ARCH}.zip.sha256"
+          ditto -c -k --sequesterRsrc --keepParent build/screenboop.app "build/screenboop-macOS-${ARCH}.zip"
+          shasum -a 256 "build/screenboop-macOS-${ARCH}.zip" > "build/screenboop-macOS-${ARCH}.zip.sha256"
       - name: Upload the ad-hoc signed build
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: Screenboop-macOS-${{ runner.arch }}
+          name: screenboop-macOS-${{ runner.arch }}
           path: |
-            build/Screenboop-macOS-*.zip
-            build/Screenboop-macOS-*.zip.sha256
+            build/screenboop-macOS-*.zip
+            build/screenboop-macOS-*.zip.sha256
           if-no-files-found: error
           retention-days: 14

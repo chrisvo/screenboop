@@ -97,7 +97,7 @@ final class AppStore: ObservableObject {
 
     func openImage() {
         let panel = NSOpenPanel()
-        panel.title = "Open an image in Screenboop"
+        panel.title = "Open an image in screenboop"
         panel.allowedContentTypes = [.image]
         panel.allowsMultipleSelection = false
         if panel.runModal() == .OK, let url = panel.url { importFile(url) }
@@ -253,7 +253,7 @@ final class AppStore: ObservableObject {
         guard document != nil else { return }
         let panel = NSSavePanel()
         panel.allowedContentTypes = jpeg ? [.jpeg] : [.png]
-        panel.nameFieldStringValue = "\(document?.title ?? "Screenboop").\(jpeg ? "jpg" : "png")"
+        panel.nameFieldStringValue = "\(document?.title ?? "screenboop").\(jpeg ? "jpg" : "png")"
         panel.canCreateDirectories = true
         panel.title = "Export flattened image"
         if let path = UserDefaults.standard.string(forKey: "exportDirectory") { panel.directoryURL = URL(fileURLWithPath: path) }
@@ -336,8 +336,8 @@ final class AppStore: ObservableObject {
 
     func clearHistory() {
         let alert = NSAlert()
-        alert.messageText = "Delete Screenboop’s saved capture history?"
-        alert.informativeText = "This removes images in Screenboop’s private capture folder, including unredacted originals. Exported files elsewhere and the current editor image are unchanged."
+        alert.messageText = "Delete screenboop’s saved capture history?"
+        alert.informativeText = "This removes images in screenboop’s private capture folder, including unredacted originals. Exported files elsewhere and the current editor image are unchanged."
         alert.addButton(withTitle: "Delete history")
         alert.addButton(withTitle: "Cancel")
         guard alert.runModal() == .alertFirstButtonReturn else { return }
